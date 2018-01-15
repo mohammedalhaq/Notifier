@@ -13,31 +13,37 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="100dp"
         android:onClick="viewTime"
         android:text="@string/time"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/setDescription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="100dp"
+        android:onClick="viewDate"
         android:text="@string/date"
         android:textSize="18sp"
-        android:onClick="viewDate"
+        app:layout_constraintBottom_toTopOf="@+id/setDescription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/setDescription"
         android:layout_width="312dp"
         android:layout_height="108dp"
-        android:layout_marginBottom="116dp"
+        android:layout_marginBottom="108dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
         android:ems="10"

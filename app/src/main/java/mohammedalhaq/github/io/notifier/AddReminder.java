@@ -19,8 +19,10 @@ import java.util.Calendar;
 
 public class AddReminder extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     TextView dateText, timeText;
-    int currentYear,currentMonth,currentDay;
-    String time, date;
+    int currentYear,currentMonth,currentDay, currentHour, currentMinute;
+    String time, date, description;
+    CheckBox checkBox;
+    Calendar toNotify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +31,25 @@ public class AddReminder extends AppCompatActivity implements DatePickerDialog.O
 
         dateText = findViewById(R.id.date);
         timeText = findViewById(R.id.time);
+        EditText editText = (EditText) findViewById(R.id.setDescription);
+        description = (String) editText.getText().toString();
 
-        CheckBox checkBox = (CheckBox) findViewById(R.id.checkPriority);
+
+        checkBox = (CheckBox) findViewById(R.id.checkPriority);
 
     }
 
     public void setReminder(View view){
+        toNotify.set(currentYear,currentMonth,currentDay,currentHour,currentMinute);
+
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("userSetTime", time);
         intent.putExtra("userSetDate", date);
+        intent.putExtra("userDescription", description);
+        intent.putExtra("toNotify", toNotify);
+        if (checkBox.isChecked()){
+            intent.putExtra("isPriority", true);
+        }
         startActivity(intent);
     }
 
@@ -67,6 +79,9 @@ public class AddReminder extends AppCompatActivity implements DatePickerDialog.O
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         if ((year!=0) || (month!=0) || (day!=0)) {
+            currentYear=year;
+            currentMonth=month;
+            currentDay=day;
             date = String.valueOf(day) + "/" + String.valueOf(month+1);
             if (!Integer.toString(currentYear).equals(String.valueOf(year))) {
                 date += "/" + String.valueOf(year);
@@ -81,6 +96,8 @@ public class AddReminder extends AppCompatActivity implements DatePickerDialog.O
 
     @Override
     public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+        currentHour=hour;
+        currentMinute=minute;
 
     }
 }
